@@ -39,4 +39,4 @@ def amazing_function():
 logger = P2TG("telegram bot token", 1337, also_print=True)
 ```
 
-Original idea from here [this repo](https://github.com/laike9m/f)
+Original idea from [this repo](https://github.com/laike9m/f)
