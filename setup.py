@@ -1,0 +1,26 @@
+from setuptools import setup
+
+setup(name="p2tg",
+      version="0.1",
+      description="Redirect stdout to telegram chat",
+      license="Apache License 2.0",
+      author="Artem Vang",
+      author_email="vangogius@gmail.com",
+      url="https://github.com/vangaa/print2telegram",
+      py_modules=['p2tg'],
+      classifiers=[
+          'Programming Language :: Python',
+          'Intended Audience :: Developers',
+          'License :: OSI Approved :: Apache Software License',
+          'Programming Language :: Python',
+          'Programming Language :: Python :: 2',
+          'Programming Language :: Python :: 2.6',
+          'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3',
+          'Programming Language :: Python :: 3.3',
+          'Programming Language :: Python :: 3.4',
+          'Programming Language :: Python :: 3.5',
+          'Topic :: Software Development :: Libraries :: Python Modules',
+          'Programming Language :: Python :: Implementation :: PyPy',
+          'Programming Language :: Python :: Implementation :: CPython',
+      ])
