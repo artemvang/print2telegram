@@ -1,5 +1,7 @@
 # print2telegram
 
+![build status](https://travis-ci.org/vangaa/print2telegram.svg?branch=master)
+
 Redirect stdout stream contents to telegram chat.
 
 # Installation
