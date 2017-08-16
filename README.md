@@ -2,7 +2,7 @@
 
 ![build status](https://travis-ci.org/vangaa/print2telegram.svg?branch=master)
 
-Redirect stdout stream contents to telegram chat.
+Library just redirects stdout stream contents to telegram chat line by line.
 
 # Installation
 
