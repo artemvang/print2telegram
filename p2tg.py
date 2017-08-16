@@ -29,7 +29,7 @@ class Reader(object):
             if self.also_print:
                 print(line, file=sys.__stdout__, end='')
             self.send_message(line)
-            self.lines = []
+            self.__lines = []
 
     def send_message(self, data):
         args = {
