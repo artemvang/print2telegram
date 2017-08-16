@@ -16,9 +16,7 @@ def test_posting_context(logger):
     with logger:
         for i in range(2):
             print(SAMPLE_MESSAGE.format(i))
-    assert all(
-        SAMPLE_MESSAGE.format(i) == res["result"]["text"]
-        for res, i in zip(logger.request_results, range(2)))
+    compare_strings(logger)
 
 
 def test_posting_decorator(logger):
@@ -28,6 +26,9 @@ def test_posting_decorator(logger):
             print(x.format(i))
 
     sample_func(SAMPLE_MESSAGE)
+    compare_strings(logger)
+
+def compare_strings(logger):
     assert all(
         SAMPLE_MESSAGE.format(i) == res["result"]["text"]
         for res, i in zip(logger.request_results, range(2)))
