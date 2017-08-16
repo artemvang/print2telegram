@@ -1,6 +1,6 @@
 # print2telegram
 
-[![build status](https://travis-ci.org/vangaa/print2telegram.svg)](https://travis-ci.org/vangaa/print2telegram)
+[![build status](https://travis-ci.org/vangaa/print2telegram.svg)](https://travis-ci.org/vangaa/print2telegram) [![PyPI version](https://badge.fury.io/py/p2tg.svg)](https://badge.fury.io/py/p2tg)
 
 Library just redirects stdout stream contents to telegram chat line by line.
 
