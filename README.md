@@ -1,6 +1,6 @@
 # print2telegram
 
-![build status](https://travis-ci.org/vangaa/print2telegram.svg?branch=master)
+[![build status](https://travis-ci.org/vangaa/print2telegram.svg)](https://travis-ci.org/vangaa/print2telegram)
 
 Library just redirects stdout stream contents to telegram chat line by line.
 
