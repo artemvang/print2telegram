@@ -14,8 +14,9 @@ TG_URI = 'https://api.telegram.org/bot{token}/sendMessage'
 
 
 class Reader(object):
-    def __init__(self, tg_token, chat_id, also_print):
+    def __init__(self, tg_token, chat_id, also_print, old_stdout):
         self.uri = TG_URI.format(token=tg_token)
+        self.old_stdout = old_stdout
         self.chat_id = chat_id
         self.also_print = also_print
 
@@ -27,7 +28,7 @@ class Reader(object):
         if self.__lines[-1] == '\n':
             line = ''.join(self.__lines)
             if self.also_print:
-                print(line, file=sys.__stdout__, end='')
+                print(line, file=self.old_stdout, end='')
             self.send_message(line)
             self.__lines = []
 
@@ -44,7 +45,8 @@ class Reader(object):
 
 class P2TG(object):
     def __init__(self, tg_token, chat_id, also_print=False):
-        self.__fixed_stdout = Reader(tg_token, chat_id, also_print)
+        self.old_stdout = sys.stdout
+        self.__fixed_stdout = Reader(tg_token, chat_id, also_print, self.old_stdout)
 
     @property
     def request_results(self):
@@ -54,7 +56,7 @@ class P2TG(object):
         sys.stdout = self.__fixed_stdout
 
     def __exit__(self, *args):
-        sys.stdout = sys.__stdout__
+        sys.stdout = self.old_stdout
 
     def __call__(self, function):
         def wrapper(*args, **kwargs):
