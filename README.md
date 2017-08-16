@@ -1,6 +1,8 @@
 # print2telegram
 
-Redirect stdout stream contents to telegram chat.
+[![build status](https://travis-ci.org/vangaa/print2telegram.svg)](https://travis-ci.org/vangaa/print2telegram)
+
+Library just redirects stdout stream contents to telegram chat line by line.
 
 # Installation
 
@@ -37,4 +39,4 @@ def amazing_function():
 logger = P2TG("telegram bot token", 1337, also_print=True)
 ```
 
-Original idea here [this repo](https://github.com/laike9m/f)
+Original idea from [this repo](https://github.com/laike9m/f)
