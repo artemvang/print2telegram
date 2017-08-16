@@ -43,7 +43,7 @@ class Reader(object):
 
 
 class P2TG(object):
-    def __init__(self, tg_token, chat_id, also_print=True):
+    def __init__(self, tg_token, chat_id, also_print=False):
         self.__fixed_stdout = Reader(tg_token, chat_id, also_print)
 
     @property
