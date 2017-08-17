@@ -6,7 +6,9 @@ import json
 try:
     from urllib.request import urlopen
     from urllib.parse import urlencode
+    from urllib.error import URLError
 except ImportError:
+    from urllib2 import URLError
     from urllib2 import urlopen
     from urllib import urlencode
 
@@ -38,9 +40,12 @@ class Reader(object):
             'text': data,
         }
         args = urlencode(args).encode("utf-8")
-        data = urlopen(self.uri, args)
-        data = json.loads(data.read().decode("utf-8"))
-        self.request_results.append(data)
+        try:
+            data = urlopen(self.uri, args)
+            data = json.loads(data.read().decode("utf-8"))
+            self.request_results.append(data)
+        except URLError:
+            pass
 
 
 class P2TG(object):
