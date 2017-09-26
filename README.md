@@ -18,6 +18,19 @@ from p2tg import P2TG
 logger = P2TG("telegram bot token", 1337)
 ```
 
+Or you can set logger parameters via environment variables:
+```
+export TG_CHAT_ID="chat_id"
+export TG_API_TOKEN="api_token"
+```
+
+And then:
+```python
+from p2tg import P2TG
+
+logger = P2TG()
+```
+
 ### Use as context manager:
 ```python
 with logger:

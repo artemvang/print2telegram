@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import os
 import sys
 import json
 
@@ -49,9 +50,18 @@ class Reader(object):
 
 
 class P2TG(object):
-    def __init__(self, tg_token, chat_id, also_print=False):
+    def __init__(self, tg_token=None, chat_id=None, also_print=False):
         self.old_stdout = sys.stdout
-        self.__fixed_stdout = Reader(tg_token, chat_id, also_print, self.old_stdout)
+
+        if not tg_token:
+            tg_token = os.getenv('TG_API_TOKEN', None)
+        if not chat_id:
+            chat_id = os.getenv('TG_CHAT_ID', None)
+
+        if not tg_token or not chat_id:
+            raise ValueError("Find `None` values `tg_token` or `chat_id`")
+
+        self.__fixed_stdout = Reader(tg_token, int(chat_id), also_print, self.old_stdout)
 
     @property
     def request_results(self):

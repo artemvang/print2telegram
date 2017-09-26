@@ -28,6 +28,7 @@ def test_posting_decorator(logger):
     sample_func(SAMPLE_MESSAGE)
     compare_strings(logger)
 
+
 def compare_strings(logger):
     assert all(
         SAMPLE_MESSAGE.format(i) == res["result"]["text"]
