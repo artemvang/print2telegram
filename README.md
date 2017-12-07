@@ -33,13 +33,18 @@ logger = P2TG()
 
 ### Use as context manager:
 ```python
-with logger:
-    print('Text')
+with logger.messages_send: # just send message
+    print('Text1') # first message
+    print('Text2') # second message
+    
+with logger.messages_update: # send message and update him in next print calls
+    print('Text1') # first message
+    print('Text2') # update for first message
 ```
 
 ### And as decorator:
 ```python
-@logger
+@logger.messages_send
 def amazing_function():
     print('Text')
 ```
