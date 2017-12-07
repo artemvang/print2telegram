@@ -1,6 +1,5 @@
 from __future__ import print_function
 
-import enum
 import os
 import sys
 import json
