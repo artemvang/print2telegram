@@ -132,5 +132,9 @@ class P2TG:
         return _P2TG(self.tg_token, self.chat_id, self.also_print)
 
 
-tg_send = P2TG().msg_send
-tg_update = P2TG().msg_update
+try:
+    tg_send = P2TG().msg_send
+    tg_update = P2TG().msg_update
+except ValueError:
+    tg_send = None
+    tg_update = None

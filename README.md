@@ -27,6 +27,8 @@ export TG_API_TOKEN="api_token"
 And then:
 ```python
 from p2tg import P2TG
+# Or
+from p2tg import tg_send, tg_update
 
 logger = P2TG()
 ```
@@ -34,10 +36,12 @@ logger = P2TG()
 ### Use as context manager:
 ```python
 with logger.messages_send: # just send message
+# or with tg_send:
     print('Text1') # first message
     print('Text2') # second message
     
 with logger.messages_update: # send message and update him in next print calls
+# or with tg_update:
     print('Text1') # first message
     print('Text2') # update for first message
 ```
@@ -52,7 +56,7 @@ def amazing_function():
 ## Result:
 ![result](result.png?raw=true "Result")
 
-### Log to both stdout and telegram chat
+### Log to both stdout and telegram bot
 ```python
 logger = P2TG("telegram bot token", 1337, also_print=True)
 ```
