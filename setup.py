@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name="p2tg",
-      version="0.1.6",
+      version="0.2",
       description="Redirects stdout stream contents to telegram chat",
       license="Apache License 2.0",
       author="Artem Vang",
