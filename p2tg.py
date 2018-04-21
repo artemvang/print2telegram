@@ -14,13 +14,14 @@ except ImportError:
     from urllib import urlencode
 
 
-TG_URI_SEND_MSG = 'https://api.telegram.org/bot{token}/sendMessage'
-TG_URI_UPDATE_MSG = 'https://api.telegram.org/bot{token}/editMessageText'
+TG_URI_SEND_MSG = "https://api.telegram.org/bot{token}/sendMessage"
+TG_URI_UPDATE_MSG = "https://api.telegram.org/bot{token}/editMessageText"
 
 
 class Reader:
 
-    def __init__(self, tg_token, chat_id, also_print, old_stdout, is_msg_update):
+    def __init__(self, tg_token, chat_id, also_print,
+                 old_stdout, is_msg_update):
         self.uri_send = TG_URI_SEND_MSG.format(token=tg_token)
         self.uri_update = TG_URI_UPDATE_MSG.format(token=tg_token)
         self.old_stdout = old_stdout
@@ -34,10 +35,10 @@ class Reader:
 
     def write(self, data):
         self._lines.append(data)
-        if self._lines[-1] == '\n':
-            line = ''.join(self._lines)
+        if self._lines[-1] == "\n":
+            line = "".join(self._lines)
             if self.also_print:
-                print(line, file=self.old_stdout, end='')
+                print(line, file=self.old_stdout, end="")
 
             if self.is_msg_update:
                 if not self._last_message_id:
@@ -51,24 +52,23 @@ class Reader:
 
     def send_message(self, data):
         args = {
-            'chat_id': self.chat_id,
-            'text': data,
+            "chat_id": self.chat_id,
+            "text": data,
         }
         args = urlencode(args).encode("utf-8")
         try:
             resp = urlopen(self.uri_send, args)
             resp = json.loads(resp.read().decode("utf-8"))
-            self._last_message_id = resp['result']['message_id']
+            self._last_message_id = resp["result"]["message_id"]
             return resp
         except URLError:
             pass
 
-
     def update_last_message(self, data):
         args = {
-            'chat_id': self.chat_id,
-            'text': data,
-            'message_id': self._last_message_id
+            "chat_id": self.chat_id,
+            "text": data,
+            "message_id": self._last_message_id
         }
         args = urlencode(args).encode("utf-8")
         try:
@@ -108,24 +108,29 @@ class _P2TG:
 
 class P2TG:
 
-    def __init__(self, tg_token=None, chat_id=None, also_print=False):
+    def __init__(self, tg_token=None, chat_id=None, also_print=True):
         if not tg_token:
-            tg_token = os.getenv('TG_API_TOKEN')
+            tg_token = os.getenv("TG_API_TOKEN")
         if not chat_id:
-            chat_id = os.getenv('TG_CHAT_ID')
+            chat_id = os.getenv("TG_CHAT_ID")
 
         if not tg_token or not chat_id:
-            raise ValueError("Find `None` values `tg_token` or `chat_id`")
+            msg = "Can't determine values for tg_token or chat_id"
+            raise ValueError(msg)
 
         self.tg_token = tg_token
         self.chat_id = int(chat_id)
         self.also_print = also_print
 
     @property
-    def messages_update(self):
+    def msg_update(self):
         return _P2TG(self.tg_token, self.chat_id, self.also_print,
                      msg_update=True)
 
     @property
-    def messages_send(self):
+    def msg_send(self):
         return _P2TG(self.tg_token, self.chat_id, self.also_print)
+
+
+tg_send = P2TG().msg_send
+tg_update = P2TG().msg_update

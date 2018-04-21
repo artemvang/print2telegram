@@ -13,44 +13,46 @@ def logger():
 
 
 def test_ctx_send_messages(logger):
-    loggr = logger.messages_send
-    with loggr:
+    logger_send = logger.msg_send
+    with logger_send:
         for i in range(2):
             print(SAMPLE_MESSAGE.format(i))
-    compare_strings(loggr)
+    _compare_strings(logger_send)
 
 
 def test_decorator_send_messages(logger):
-    loggr = logger.messages_send
-    @loggr
+    logger_send = logger.msg_send
+
+    @logger_send
     def sample_func(x):
         for i in range(2):
             print(x.format(i))
 
     sample_func(SAMPLE_MESSAGE)
-    compare_strings(loggr)
+    _compare_strings(logger_send)
 
 
 def test_ctx_update_messages(logger):
-    loggr = logger.messages_update
-    with loggr:
+    logger_upd = logger.msg_update
+    with logger_upd:
         for i in range(2):
             print(SAMPLE_MESSAGE.format(i))
-    compare_strings(loggr)
+    _compare_strings(logger_upd)
 
 
 def test_decorator_update_messages(logger):
-    loggr = logger.messages_update
-    @loggr
+    logger_upd = logger.msg_update
+
+    @logger_upd
     def sample_func(x):
         for i in range(2):
             print(x.format(i))
 
     sample_func(SAMPLE_MESSAGE)
-    compare_strings(loggr)
+    _compare_strings(logger_upd)
 
 
-def compare_strings(logger):
+def _compare_strings(logger):
     assert all(
         SAMPLE_MESSAGE.format(i) == res["result"]["text"]
         for res, i in zip(logger.request_results, range(2)))
