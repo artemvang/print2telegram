@@ -1,4 +1,4 @@
-# print2telegram
+# P2TG
 
 [![build status](https://travis-ci.org/vangaa/print2telegram.svg)](https://travis-ci.org/vangaa/print2telegram) [![PyPI version](https://badge.fury.io/py/p2tg.svg)](https://badge.fury.io/py/p2tg)
 
